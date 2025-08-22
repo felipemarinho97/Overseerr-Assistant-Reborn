@@ -22,7 +22,7 @@ jobs:
     - name: Upload & publish
       uses: mnao305/chrome-extension-upload@v4.0.1
       with:
-        extension-id: hopnjiadheaagfhpipecoamoegijhnij
+        extension-id: jcjolbklpgfkleemmoohlbmjoheibmjc
         client-id: ${{ secrets.CLIENT_ID }}
         client-secret: ${{ secrets.CLIENT_SECRET }}
         refresh-token: ${{ secrets.REFRESH_TOKEN }}

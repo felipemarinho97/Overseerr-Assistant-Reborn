@@ -1,0 +1,11 @@
+{
+  "summary": {
+    "en-US": "Overseerr Assistant is a browser extension for Overseerr and Jellyseerr. It provides an integration for most popular media websites."
+  },
+  "categories": [
+    "other"
+  ],
+  "version": {
+    "license": "MIT"
+  }
+}
