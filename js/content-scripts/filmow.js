@@ -50,6 +50,13 @@ const asyncFilter = async (arr, predicate) => {
 };
 
 /**
+ * Dedupe array
+ */
+function dedupeArray(arr) {
+    return arr.filter((value, index, self) => self.indexOf(value) === index);
+}
+
+/**
  * Performs an exhaustive search using the original and alternative titles
  */
 async function exhaustiveSearch(titles) {
@@ -65,11 +72,18 @@ async function exhaustiveSearch(titles) {
     }
 
     // remove duplicates by id
-    searchResults = searchResults.filter((result, index, self) =>
-        index === self.findIndex((t) => (
+    searchResults = searchResults.filter((result, index, self) => {
+        self[index].hits = 1;
+        const dupIndex = self.findIndex((t) => (
             t.id === result.id
-        ))
-    );
+        ));
+        const valid = index === dupIndex;
+        if (!valid) {
+            searchResults[dupIndex].hits += 1;
+        }
+
+        return valid;
+    });
 
     return searchResults;
 }
@@ -165,6 +179,7 @@ async function handleMediaSearch() {
 
         // Perform exhaustive search with all alternative titles
         let titles = removeSeasonFromTitle([title, ...alternativeTitles]);
+        titles = dedupeArray(titles);
         let resultsSearch = await exhaustiveSearch(titles);
 
         console.log(`Search results for ${title}:`, resultsSearch);
@@ -176,12 +191,21 @@ async function handleMediaSearch() {
             return;
         }
 
-        // Filter results based on criteria (mediaType, releaseYear, director)
+        /**
+         * Apply multiply heuristics to determine the best match
+         */
+
+        // 1. Filter results based on criteria (mediaType, releaseYear, director)
         results = await filterResultsByCriteria(resultsSearch, mediaType, displayedYear, director);
-        // if no results are found, fallback to exact match of title and release year
+        // 2. If no results are found, fallback to exact match of title and release year
         if (results.length === 0) {
             results = await filterResultsByExactMatch(resultsSearch, titles, displayedYear);
         }
+        // 3. If no results are found, fallback to the media that has been consistently found for all titles
+        if (results.length === 0) {
+            results = resultsSearch.filter((result) => result.hits === titles.length);
+        }
+
         console.log('Filtered results:', results);
 
         if (results.length === 0) {

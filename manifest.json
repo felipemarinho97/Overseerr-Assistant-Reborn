@@ -71,11 +71,21 @@
   }],
   "options_page": "options.html",
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js","js/storage.js"]
   },
   "web_accessible_resources": [{
     "resources": ["images/icon.png"],
     "matches": ["<all_urls>"]
   }],
-  "manifest_version": 3
+  "manifest_version": 3,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "overseerr-assistant@darklyn.org",
+      "strict_min_version": "126.0"
+    },
+    "gecko_android": {
+      "id": "overseerr-assistant@darklyn.org",
+      "strict_min_version": "126.0"
+    }
+  }  
 }
