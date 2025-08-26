@@ -1,6 +1,6 @@
 {
   "name": "Overseerr Assistant Reborn",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Browser extension for Overseerr that embeds buttons into IMDb and TMDB web pages to easily request movies and tv shows.",
   "permissions": ["storage"],
   "host_permissions": [
@@ -27,7 +27,9 @@
     "*://*.trakt.tv/*",
     "*://trakt.tv/*",
     "*://*.taste.io/*",
-    "*://taste.io/*"
+    "*://taste.io/*",
+    "http://*/",
+    "https://*/"
   ],
   "action": {
     "default_popup": "popup.html",
