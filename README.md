@@ -32,8 +32,8 @@ Supported media websites:
 
 ## Install
 
-**[Available on the Chrome Web Store](https://chrome.google.com/webstore/detail/hopnjiadheaagfhpipecoamoegijhnij)**  
-**[Available on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/overseerr-assistant/)**  
+**[Available on the Chrome Web Store](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc)**  
+**[Available on Firefox Add-ons](https://addons.mozilla.org/firefox/addon/2e3540d770884997b398/)**  
 
 ## Screenshots
 
