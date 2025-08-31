@@ -1,4 +1,4 @@
-# Overseerr Assistant
+# Overseerr Assistant Reborn
 
 [![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/jcjolbklpgfkleemmoohlbmjoheibmjc.svg?style=flat-square)](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc)
 [![Chrome Web Store Downloads](https://img.shields.io/chrome-web-store/d/jcjolbklpgfkleemmoohlbmjoheibmjc.svg?style=flat-square)](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc/reviews)
