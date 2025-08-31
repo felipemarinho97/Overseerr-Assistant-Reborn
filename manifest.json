@@ -1,9 +1,36 @@
 {
-  "name": "Overseerr Assistant",
-  "version": "1.7.2",
+  "name": "Overseerr Assistant Reborn",
+  "version": "1.7.4",
   "description": "Browser extension for Overseerr that embeds buttons into IMDb and TMDB web pages to easily request movies and tv shows.",
   "permissions": ["storage"],
-  "host_permissions": ["http://*/", "https://*/"],
+  "host_permissions": [
+    "*://*.themoviedb.org/*",
+    "*://themoviedb.org/*",
+    "*://*.imdb.com/*",
+    "*://imdb.com/*",
+    "*://*.allocine.fr/*",
+    "*://allocine.fr/*",
+    "*://*.senscritique.com/*",
+    "*://senscritique.com/*",
+    "*://*.filmow.com/*",
+    "*://filmow.com/*",
+    "*://*.thetvdb.com/*",
+    "*://thetvdb.com/*",
+    "*://*.letterboxd.com/*",
+    "*://letterboxd.com/*",
+    "*://*.rottentomatoes.com/*",
+    "*://rottentomatoes.com/*",
+    "*://*.plex.tv/*",
+    "*://plex.tv/*",
+    "*://*.justwatch.com/*",
+    "*://justwatch.com/*",
+    "*://*.trakt.tv/*",
+    "*://trakt.tv/*",
+    "*://*.taste.io/*",
+    "*://taste.io/*",
+    "http://*/",
+    "https://*/"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -71,11 +98,21 @@
   }],
   "options_page": "options.html",
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js","js/storage.js"]
   },
   "web_accessible_resources": [{
     "resources": ["images/icon.png"],
     "matches": ["<all_urls>"]
   }],
-  "manifest_version": 3
+  "manifest_version": 3,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "overseerr-assistant@darklyn.org",
+      "strict_min_version": "126.0"
+    },
+    "gecko_android": {
+      "id": "overseerr-assistant@darklyn.org",
+      "strict_min_version": "126.0"
+    }
+  }  
 }

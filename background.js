@@ -1,4 +1,3 @@
-importScripts('js/storage.js');
 
 
 function encodeURIComponentSafe(value) {
