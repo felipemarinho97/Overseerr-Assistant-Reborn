@@ -1,6 +1,6 @@
 let overseerrContainer, tmdbId, mediaType, mediaInfo;
 
-containerOptions.anchorElement = '.movie-user-actions';
+containerOptions.anchorElement = '.movie__actions';
 containerOptions.textClass = 'text-sm';
 containerOptions.containerClass = 'oa-mt-3 oa-mb-2 oa-py-2';
 containerOptions.plexButtonClass = 'oa-bg-gray-800';
@@ -8,20 +8,22 @@ containerOptions.badgeBackground = '#032541';
 
 mediaType = document.querySelector('meta[property="og:type"]').content.includes('tv_show') ? 'tv' : 'movie';
 const filmowTitle = document.querySelector('meta[property="og:title"]').content;
-const titleElement = document.querySelector('h2.movie-original-title');
+const titleElement = document.querySelector('.movie__original-title');
 const title = titleElement ? titleElement.textContent.trim() : '';
-const releaseYearElement = document.querySelector('small.release');
-const displayedYear = releaseYearElement ? parseInt(releaseYearElement.textContent.trim()) : null;
-let directorElement = document.querySelector('span[itemprop="director"]');
+const releaseYearElement = document.querySelector('span.movie__year');
+const displayedYear = releaseYearElement ? parseInt(releaseYearElement.textContent.replace('(', '').replace(')', '').trim()) : null;
+let directorElement = document.querySelector('.movie__mobile-directors a');
 let director = directorElement ? directorElement.textContent.trim() : null;
 
-let alternativeTitles = Array.from(document.querySelectorAll('.movie-other-titles ul li strong')).map(title => title.textContent.trim());
+let alternativeTitles = Array.from(document.querySelectorAll('#movie-other-titles-modal strong')).map(title => title.textContent.trim());
 alternativeTitles.push(filmowTitle); // Add main title
 
-let alternativeDates = Array.from(document.querySelectorAll('.release_date > div')).map(date => {
+let alternativeDates = Array.from(document.querySelectorAll('.movie-releases-modal__table .date')).map(date => {
     let year = date.textContent.trim().match(/\d{4}/);
     return year ? parseInt(year[0]) : null;
 }).filter(year => year !== null);
+
+console.log('Extracted data:', { title, alternativeTitles, displayedYear, alternativeDates, director });
 
 /**
  * Helper to search for media by title

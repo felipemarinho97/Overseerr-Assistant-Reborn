@@ -49,8 +49,21 @@ function initializeContainer() {
             containerOptions.shadowRoot.adoptedStyleSheets.push(contentMain.default);
         });
     }
-    let anchor = root.find(`${containerOptions.anchorElement}:first`);
-    if (!anchor) {
+    let anchorList = root.find(`${containerOptions.anchorElement}`);
+    // get first visible anchor element
+    let anchor = null;
+    for (let i = 0; i < anchorList.length; i++) {
+        if (anchorList[i].offsetParent !== null) {
+            anchor = $(anchorList[i]);
+            break;
+        }
+    }
+    // If no visible anchor element is found, use the first one in the list
+    if (!anchor && anchorList.length > 0) {
+        anchor = $(anchorList[0]);
+    }
+    console.log('Found anchor element for Overseerr container:', anchor);
+    if (!anchor || anchor.length === 0) {
         console.error('Anchor element not found for Overseerr container');
     }
     overseerrContainer.insertAfter(anchor);
