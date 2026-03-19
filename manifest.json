@@ -51,7 +51,7 @@
     "css": ["css/style.css"],
     "js": ["js/lib/jquery-3.5.1.min.js", "js/storage.js", "js/overseerr-container.js", "js/content-scripts/tmdb.js"]
   }, {
-    "matches": ["https://www.imdb.com/title/*"],
+    "matches": ["https://www.imdb.com/title/*", "https://www.imdb.com/*/title/*"],
     "css": ["css/style.css"],
     "js": ["js/lib/jquery-3.5.1.min.js", "js/storage.js", "js/overseerr-container.js", "js/content-scripts/imdb.js"]
   }, {
@@ -101,7 +101,7 @@
     "scripts": ["background.js","js/storage.js"]
   },
   "web_accessible_resources": [{
-    "resources": ["images/icon.png"],
+    "resources": ["images/icon.png", "css/style.css"],
     "matches": ["<all_urls>"]
   }],
   "manifest_version": 3,
