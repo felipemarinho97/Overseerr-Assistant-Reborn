@@ -1,4 +1,7 @@
 .idea/
+dist
+web-ext-artifacts
 
+.amo-upload-uuid
 *.zip
 .env
