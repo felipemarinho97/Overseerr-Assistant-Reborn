@@ -12,11 +12,17 @@ setup:
 	npm i -g web-ext
 
 build:
-	web-ext build --overwrite-dest
+	@echo "Building Firefox extension..."
+	@web-ext build --overwrite-dest
 
 sign:
-	web-ext sign --api-key=$$KEY --api-secret=$$SECRET --channel=listed --amo-metadata metadata.json
+	@echo "Signing Firefox extension..."
+	@web-ext sign --api-key=$$KEY --api-secret=$$SECRET --channel=listed --amo-metadata metadata.json
 
+publish-ff-ci: build
+	@# Upload to AMO using the generated .xpi file and the API credentials
+	@echo "Publishing to AMO..."
+	@web-ext sign --api-key=$$AMO_API_KEY --api-secret=$$AMO_API_SECRET --channel=listed --amo-metadata metadata.json --artifacts-dir web-ext-artifacts
 
 # Caminhos
 FF_BUILD := web-ext-artifacts/*.xpi
