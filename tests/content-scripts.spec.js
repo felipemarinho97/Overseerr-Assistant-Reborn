@@ -12,10 +12,14 @@
  * Run:
  *   npm test
  *   npx playwright test --grep "IMDb"
- *   PWDEBUG=1 npx playwright test   # headed mode for debugging
+ *   npx playwright test --grep "Mobile"   # mobile tests only
+ *   PWDEBUG=1 npx playwright test          # headed mode for debugging
+ *
+ * Mobile tests run inside a 'Mobile' describe block using test.use() to apply
+ * Pixel 5 emulation (390×844 viewport, mobile UA, touch). No separate project needed.
  */
 
-const { test, expect } = require('@playwright/test');
+const { test, expect, devices } = require('@playwright/test');
 const { loadPage, injectAndRun, readMessages, readContainer, isCloudflareChallenge } = require('./helpers');
 const { name } = require('../playwright.config');
 
@@ -189,13 +193,10 @@ const CASES = [
     }
 ];
 
-// ─── Test runner ──────────────────────────────────────────────────────────────
-// Two tests are generated for every case: scraping and container insertion.
+// ─── Shared test body helpers ─────────────────────────────────────────────────
 
-for (const tc of CASES) {
-    // ── Test 1: scraping ──────────────────────────────────────────────────────
-    // Verifies the script reads the correct metadata from the page DOM.
-    test(`${tc.name} – scraping`, async ({ page }) => {
+function runScrapingTest(tc) {
+    return async ({ page }) => {
         if (tc.timeout) test.setTimeout(tc.timeout);
 
         await loadPage(page, tc.url, tc.waitUntil);
@@ -217,11 +218,11 @@ for (const tc of CASES) {
         if (tc.expected.title     !== undefined) expect(msg.title,     'Wrong scraped title').toBe(tc.expected.title);
         if (tc.expected.tmdbId    !== undefined) expect(msg.tmdbId,    'Wrong scraped TMDB id').toBe(tc.expected.tmdbId);
         if (tc.expected.mediaType !== undefined) expect(msg.mediaType, 'Wrong scraped mediaType').toBe(tc.expected.mediaType);
-    });
+    };
+}
 
-    // ── Test 2: container insertion ───────────────────────────────────────────
-    // Verifies the script inserts #overseerr-assistant-container into the page.
-    test(`${tc.name} – container insertion`, async ({ page }) => {
+function runContainerTest(tc) {
+    return async ({ page }) => {
         if (tc.timeout) test.setTimeout(tc.timeout);
 
         await loadPage(page, tc.url, tc.waitUntil);
@@ -234,5 +235,32 @@ for (const tc of CASES) {
 
         const found = await readContainer(page);
         expect(found, `#overseerr-assistant-container not inserted on ${tc.url}`).toBe(true);
-    });
+    };
 }
+
+// ─── Desktop tests ────────────────────────────────────────────────────────────
+// Runs with the default desktop viewport (1280×800).
+
+test.describe('Desktop', () => {
+    for (const tc of CASES) {
+        test(`${tc.name} – scraping`,            runScrapingTest(tc));
+        test(`${tc.name} – container insertion`, runContainerTest(tc));
+    }
+});
+
+// ─── Mobile tests ─────────────────────────────────────────────────────────────
+// Same tests re-run under a Pixel 5 emulation (390×844, mobile UA, touch).
+// Uses test.use() to override viewport/UA for this describe block only.
+// Note: defaultBrowserType is intentionally omitted — it cannot be set inside
+// a describe block. The project-level browserName (chromium) is used instead.
+
+const { defaultBrowserType: _drop, ...pixel5 } = devices['Pixel 5'];
+
+test.describe('Mobile', () => {
+    test.use(pixel5);
+
+    for (const tc of CASES) {
+        test(`${tc.name} – scraping`,            runScrapingTest(tc));
+        test(`${tc.name} – container insertion`, runContainerTest(tc));
+    }
+});
