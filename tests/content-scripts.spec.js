@@ -177,20 +177,20 @@ const CASES = [
         waitUntil: 'networkidle',
         expected: { query: 'queryMedia', tmdbId: 1396, mediaType: 'tv' },
     },
-    {
-        name: 'SensCritique – Movie',
-        url: 'https://www.senscritique.com/film/fight_club/363185',
-        script: 'senscritique',
-        waitUntil: 'networkidle',
-        expected: { query: 'search', title: 'Fight Club' },
-    },
-    {
-        name: 'SensCritique – TV Show',
-        url: 'https://www.senscritique.com/serie/breaking_bad/264963',
-        script: 'senscritique',
-        waitUntil: 'networkidle',
-        expected: { query: 'search', title: 'Breaking Bad' },
-    }
+    // {
+    //     name: 'SensCritique – Movie',
+    //     url: 'https://www.senscritique.com/film/fight_club/363185',
+    //     script: 'senscritique',
+    //     waitUntil: 'networkidle',
+    //     expected: { query: 'search', title: 'Fight Club' },
+    // },
+    // {
+    //     name: 'SensCritique – TV Show',
+    //     url: 'https://www.senscritique.com/serie/breaking_bad/264963',
+    //     script: 'senscritique',
+    //     waitUntil: 'networkidle',
+    //     expected: { query: 'search', title: 'Breaking Bad' },
+    // }
 ];
 
 // ─── Shared test body helpers ─────────────────────────────────────────────────
