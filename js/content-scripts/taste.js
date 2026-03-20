@@ -1,6 +1,6 @@
 let overseerrContainer, allocineId, tmdbId, mediaType, mediaInfo;
 
-containerOptions.anchorElement = 'div.styles_container__2u8xM';
+containerOptions.anchorElement = 'h1:first';
 containerOptions.textClass = 'text-sm';
 containerOptions.containerClass = 'oa-mt-0 oa-mb-6 oa-py-2';
 containerOptions.plexButtonClass = 'oa-bg-gray-800';

@@ -1,0 +1,27 @@
+{
+  "name": "overseerr-assistant-reborn",
+  "version": "1.0.0",
+  "description": "[![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/jcjolbklpgfkleemmoohlbmjoheibmjc.svg?style=flat-square)](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc) [![Chrome Web Store Downloads](https://img.shields.io/chrome-web-store/d/jcjolbklpgfkleemmoohlbmjoheibmjc.svg?style=flat-square)](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc/reviews) [![Chrome Web Store Rating](https://img.shields.io/chrome-web-store/stars/jcjolbklpgfkleemmoohlbmjoheibmjc.svg?style=flat-square)](https://chrome.google.com/webstore/detail/jcjolbklpgfkleemmoohlbmjoheibmjc/reviews)",
+  "main": "background.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "PWDEBUG=1 playwright test",
+    "test:report": "playwright show-report tests/report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipemarinho97/Overseerr-Assistant-Reborn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/felipemarinho97/Overseerr-Assistant-Reborn/issues"
+  },
+  "homepage": "https://github.com/felipemarinho97/Overseerr-Assistant-Reborn#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

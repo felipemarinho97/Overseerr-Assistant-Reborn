@@ -29,7 +29,7 @@ function getPlexToken() {
             return matches[1];
         }
     }
-    return null;
+    return localStorage.getItem('myPlexAccessToken');
 }
 
 function getMediaKey() {
