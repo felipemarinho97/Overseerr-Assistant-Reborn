@@ -5,3 +5,9 @@ web-ext-artifacts
 .amo-upload-uuid
 *.zip
 .env
+
+# Node / Playwright
+node_modules/
+tests/report/
+test-results/
+playwright-report/
